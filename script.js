@@ -43,7 +43,7 @@ startBtn.addEventListener("click", () => {
         .toString()
         .padStart(2, "0");
       const seconds = (elapsedTime % 60).toString().padStart(2, "0");
-      recordingLengthText.textContent = `Recording Length: ${minutes}:${seconds}`;
+      recordingLengthText.textContent = `${minutes}:${seconds}`;
     }, 1000); // Update every second
 
     // Enable the stop button and disable the start button
@@ -92,7 +92,7 @@ uploadBtn.addEventListener("click", () => {
   // Assuming formData contains the audio file data
   const formData = new FormData();
   formData.append("audio", audioBlob, "audio.wav");
-  fetch("http://localhost:3000/upload_audio", {
+  fetch("https://anhlt-record-api.onrender.com/upload_audio", {
     method: "POST",
     body: formData,
   })
