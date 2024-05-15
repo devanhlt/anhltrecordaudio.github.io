@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rebeccapurple;
+}
+
+.container {
+    display: flex;
+}
+
+.left-side {
+    width: 50%;
+    padding: 20px;
+}
+
+.right-side {
+    width: 50%;
+    padding: 20px;
+}
+
+#statusCircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: grey;
+}
