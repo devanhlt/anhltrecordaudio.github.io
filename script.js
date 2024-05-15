@@ -10,6 +10,7 @@ let stream; // Define stream variable in a broader scope
 
 // Disable the stop button initially
 stopBtn.disabled = true;
+uploadBtn.disabled = true;
 
 document.addEventListener("DOMContentLoaded", () => {
   navigator.mediaDevices
@@ -99,7 +100,6 @@ uploadBtn.addEventListener("click", () => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      uploadBtn.disabled = false;
       alert("Audio file uploaded successfully");
     })
     .catch((error) => {
