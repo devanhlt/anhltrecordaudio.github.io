@@ -21,13 +21,14 @@ function renderItemsFromApi(apiUrl, targetDivId) {
       while (targetDiv.firstChild) {
         targetDiv.removeChild(targetDiv.firstChild);
       }
-      data.forEach((item) => {
-        const link = document.createElement("a");
-        link.target = "_blank";
-        link.href = "https://anhlt-record-api.onrender.com/files/" + item;
-        link.textContent = item;
-        targetDiv.appendChild(link);
-      });
+      !!data &&
+        data.forEach((item) => {
+          const link = document.createElement("a");
+          link.target = "_blank";
+          link.href = "https://anhlt-record-api.onrender.com/files/" + item;
+          link.textContent = item;
+          targetDiv.appendChild(link);
+        });
     })
     .catch((error) => console.error("Error fetching data:", error));
 }
