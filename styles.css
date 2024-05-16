@@ -55,7 +55,7 @@ body {
 #stopBtn{
     width: 100px;
     height: 50px;
-    background-color: #f44336;
+    background-color: black;
     color: white;
     border: none;
     border-radius: 16px;
@@ -94,6 +94,16 @@ body {
     border-radius: 16px;
     cursor: pointer;
     margin-left: 8px;
+}
+
+#clearBtn{
+    width: 80px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
 }
 
 #list_audio{
