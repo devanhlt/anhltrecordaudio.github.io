@@ -147,6 +147,7 @@ clearBtn.addEventListener("click", () => {
         "https://anhlt-record-api.onrender.com/list_files",
         "list_audio"
       );
+      alert("Deleted!");
     })
     .catch((error) => {
       alert("Failed!");
