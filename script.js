@@ -21,7 +21,7 @@ function renderItemsFromApi(apiUrl, targetDivId) {
       while (targetDiv.firstChild) {
         targetDiv.removeChild(targetDiv.firstChild);
       }
-      !!data &&
+      data &&
         data.forEach((item) => {
           const link = document.createElement("a");
           link.target = "_blank";
@@ -143,10 +143,10 @@ clearBtn.addEventListener("click", () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      renderItemsFromApi(
-        "https://anhlt-record-api.onrender.com/list_files",
-        "list_audio"
-      );
+      const targetDiv = document.getElementById("list_audio");
+      while (targetDiv.firstChild) {
+        targetDiv.removeChild(targetDiv.firstChild);
+      }
       alert("Deleted!");
     })
     .catch((error) => {
