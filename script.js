@@ -22,10 +22,6 @@ function renderItemsFromApi(apiUrl, targetDivId) {
         targetDiv.removeChild(targetDiv.firstChild);
       }
       data.forEach((item) => {
-        console.log(
-          "LOGGG",
-          "https://anhlt-record-api.onrender.com/files/" + item
-        );
         const link = document.createElement("a");
         link.target = "_blank";
         link.href = "https://anhlt-record-api.onrender.com/files/" + item;
@@ -141,7 +137,9 @@ uploadBtn.addEventListener("click", () => {
 });
 
 clearBtn.addEventListener("click", () => {
-  fetch("https://anhlt-record-api.onrender.com/clear_audios")
+  fetch("https://anhlt-record-api.onrender.com/clear_audios", {
+    method: "DELETE",
+  })
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
