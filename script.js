@@ -12,12 +12,40 @@ let stream; // Define stream variable in a broader scope
 stopBtn.disabled = true;
 uploadBtn.disabled = true;
 
+function renderItemsFromApi(apiUrl, targetDivId) {
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const targetDiv = document.getElementById(targetDivId);
+      // Clear all existing child nodes
+      while (targetDiv.firstChild) {
+        targetDiv.removeChild(targetDiv.firstChild);
+      }
+      data.forEach((item) => {
+        console.log(
+          "LOGGG",
+          "https://anhlt-record-api.onrender.com/files/" + item
+        );
+        const link = document.createElement("a");
+        link.target = "_blank";
+        link.href = "https://anhlt-record-api.onrender.com/files/" + item;
+        link.textContent = item;
+        targetDiv.appendChild(link);
+      });
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   navigator.mediaDevices
     .getUserMedia({ audio: true })
     .then((userStream) => {
       stream = userStream;
       startBtn.disabled = false; // Enable start button once permission is granted
+      renderItemsFromApi(
+        "https://anhlt-record-api.onrender.com/list_files",
+        "list_audio"
+      );
     })
     .catch((error) => {
       console.error("Error accessing microphone:", error);
@@ -101,6 +129,10 @@ uploadBtn.addEventListener("click", () => {
     .then((data) => {
       console.log(data);
       alert("Audio file uploaded successfully");
+      renderItemsFromApi(
+        "https://anhlt-record-api.onrender.com/list_files",
+        "list_audio"
+      );
     })
     .catch((error) => {
       uploadBtn.disabled = false;

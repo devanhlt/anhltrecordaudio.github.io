@@ -95,3 +95,27 @@ body {
     cursor: pointer;
     margin-left: 8px;
 }
+
+#list_audio{
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background-color: lightgrey;
+    width: "100%";
+    height: 400px;
+    overflow: auto;
+}
+
+a {
+    padding: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: block; /* Make the link a block element to fill the width */
+    margin: 2px;
+    text-decoration: none;
+    color: black;
+    border-radius: 8px;
+    text-decoration: underline;
+  }
