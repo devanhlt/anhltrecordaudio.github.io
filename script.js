@@ -142,7 +142,6 @@ clearBtn.addEventListener("click", () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       renderItemsFromApi(
         "https://anhlt-record-api.onrender.com/list_files",
         "list_audio"
