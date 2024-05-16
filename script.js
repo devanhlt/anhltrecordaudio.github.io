@@ -141,8 +141,7 @@ clearBtn.addEventListener("click", () => {
   fetch("https://anhlt-record-api.onrender.com/clear_audios", {
     method: "DELETE",
   })
-    .then((response) => response.json())
-    .then((data) => {
+    .then(() => {
       const targetDiv = document.getElementById("list_audio");
       while (targetDiv.firstChild) {
         targetDiv.removeChild(targetDiv.firstChild);
