@@ -23,11 +23,24 @@ function renderItemsFromApi(apiUrl, targetDivId) {
       }
       data &&
         data.forEach((item) => {
-          const link = document.createElement("a");
-          link.target = "_blank";
-          link.href = "https://anhlt-record-api.onrender.com/files/" + item;
-          link.textContent = item;
-          targetDiv.appendChild(link);
+          const targetDiv = document.getElementById("list_audio"); // Replace "targetDiv" with the ID of the target div element
+          const playButtonDiv = document.createElement("div");
+          playButtonDiv.classList.add("play-button");
+
+          const playButtonLink = document.createElement("a");
+          playButtonLink.classList.add("play-title");
+          playButtonLink.textContent = item;
+          playButtonLink.target = "_blank";
+          playButtonLink.href =
+            "https://anhlt-record-api.onrender.com/files/" + item; // Replace "item" with the variable containing the audio file name
+
+          const playIcon = document.createElement("i");
+          playIcon.classList.add("play-icon");
+          playIcon.innerHTML = "&#9654;";
+
+          playButtonLink.appendChild(playIcon);
+          playButtonDiv.appendChild(playButtonLink);
+          targetDiv.appendChild(playButtonDiv);
         });
     })
     .catch((error) => console.error("Error fetching data:", error));
