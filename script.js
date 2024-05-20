@@ -34,11 +34,6 @@ function renderItemsFromApi(apiUrl, targetDivId) {
           playButtonLink.href =
             "https://anhlt-record-api.onrender.com/files/" + item; // Replace "item" with the variable containing the audio file name
 
-          const playIcon = document.createElement("i");
-          playIcon.classList.add("play-icon");
-          playIcon.innerHTML = "&#9654;";
-
-          playButtonLink.appendChild(playIcon);
           playButtonDiv.appendChild(playButtonLink);
           targetDiv.appendChild(playButtonDiv);
         });
