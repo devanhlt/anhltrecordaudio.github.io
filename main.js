@@ -27,25 +27,18 @@ document.addEventListener("DOMContentLoaded", () => {
 async function startRecording() {
   const options = { audio: true, video: false };
   stream = await navigator.mediaDevices.getUserMedia(options);
+  recordedChunks = [];
   context = new AudioContext();
   await context.audioWorklet.addModule("/get-voice-node.js");
   mp3Encoder = new lamejs.Mp3Encoder(1, context.sampleRate, 128);
 
   mediaSource = context.createMediaStreamSource(stream);
 
-  // if (context.createScriptProcessor) {
-  //   mediaProcessor = context.createScriptProcessor(0, 1, 1);
-  //   mediaProcessor.onaudioprocess = (event) => {
-  //     const inputBuffer = event.inputBuffer.getChannelData(0);
-  //     _decode(inputBuffer);
-  //   };
-  // } else {
   mediaProcessor = new AudioWorkletNode(context, "get-voice-node");
   mediaProcessor.port.onmessage = (e) => {
     const channelData = e.data[0];
     _decode(channelData);
   };
-  // }
 
   mediaSource.connect(mediaProcessor).connect(context.destination);
 
@@ -148,7 +141,7 @@ function uploadRecording() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      alert("Audio file uploaded successfully");
+      alert("Tải lên thành công!");
       renderItemsFromApi(
         "https://anhlt-record-api.onrender.com/list_files",
         "list_audio"
@@ -156,7 +149,7 @@ function uploadRecording() {
     })
     .catch((error) => {
       console.error("Error uploading audio file:", error);
-      alert("Failed to upload audio file");
+      alert("Đã có lỗi!");
       uploadBtn.disabled = false;
     });
 }
