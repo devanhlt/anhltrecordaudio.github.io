@@ -44,22 +44,15 @@ function renderItemsFromApi(apiUrl, targetDivId) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  navigator.mediaDevices
-    .getUserMedia({ audio: true })
-    .then((userStream) => {
-      stream = userStream;
-      startBtn.disabled = false; // Enable start button once permission is granted
-      renderItemsFromApi(
-        "https://anhlt-record-api.onrender.com/list_files",
-        "list_audio"
-      );
-    })
-    .catch((error) => {
-      console.error("Error accessing microphone:", error);
-    });
+  renderItemsFromApi(
+    "https://anhlt-record-api.onrender.com/list_files",
+    "list_audio"
+  );
 });
 
-startBtn.addEventListener("click", () => {
+startBtn.addEventListener("click", async () => {
+  stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  startBtn.disabled = false; // Enable start button once permission is granted
   if (stream) {
     mediaRecorder = new MediaRecorder(stream);
     mediaRecorder.ondataavailable = (e) => {
