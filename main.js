@@ -93,7 +93,10 @@ stopBtn.addEventListener("click", () => {
   if (mediaRecorder && mediaRecorder.state !== "inactive") {
     mediaRecorder.stop();
     mediaRecorder.onstop = () => {
-      const audioBlob = new Blob(recordedChunks, { type: "audio/wav" });
+      const audioBlob = new Blob(recordedChunks, {
+        type: mediaRecorder.mimeType,
+      });
+      console.log(mediaRecorder.mimeType);
       const audioUrl = URL.createObjectURL(audioBlob);
       const audioElement = new Audio(audioUrl);
       audioElement.controls = true;
@@ -124,10 +127,14 @@ stopBtn.addEventListener("click", () => {
 uploadBtn.addEventListener("click", () => {
   uploadBtn.disabled = true;
   // Upload the audio file
-  const audioBlob = new Blob(recordedChunks, { type: "audio/wav" });
+  const audioBlob = new Blob(recordedChunks, { type: mediaRecorder.mimeType });
   // Assuming formData contains the audio file data
   const formData = new FormData();
-  formData.append("audio", audioBlob, "audio.wav");
+  formData.append(
+    "audio",
+    audioBlob,
+    `audio.${mimeTypeToExtension(mediaRecorder.mimeType)}`
+  );
   fetch("https://anhlt-record-api.onrender.com/upload_audio", {
     method: "POST",
     body: formData,
@@ -165,4 +172,43 @@ clearBtn.addEventListener("click", () => {
 
 function setUrlToPlayer(url) {
   document.getElementById("audioPlayer").src = url;
+}
+
+function mimeTypeToExtension(mimeType) {
+  const mimeTypes = {
+    "audio/aac": "aac",
+    "audio/midi": "mid",
+    "audio/x-midi": "mid",
+    "audio/mpeg": "mp3",
+    "audio/ogg": "ogg",
+    "audio/wav": "wav",
+    "audio/webm": "weba",
+    "audio/3gpp": "3gp",
+    "audio/3gpp2": "3g2",
+    "audio/mp4": "mp4",
+    "video/mp4": "mp4",
+    "audio/x-m4a": "m4a",
+    "video/x-m4v": "m4v",
+    "video/mpeg": "mpeg",
+    "video/ogg": "ogv",
+    "video/webm": "webm",
+    "video/3gpp": "3gp",
+    "video/3gpp2": "3g2",
+    "image/jpeg": "jpg",
+    "image/png": "png",
+    "image/gif": "gif",
+    "image/webp": "webp",
+    "image/svg+xml": "svg",
+    "application/pdf": "pdf",
+    "application/zip": "zip",
+    "application/x-rar-compressed": "rar",
+    "application/json": "json",
+    "text/plain": "txt",
+    "text/html": "html",
+    "text/css": "css",
+    "text/javascript": "js",
+    // Add more MIME types and extensions as needed
+  };
+
+  return mimeTypes[mimeType] || "";
 }
