@@ -173,8 +173,10 @@ clearBtn.addEventListener("click", () => {
 function setUrlToPlayer(url) {
   document.getElementById("audioPlayer").src = url;
 }
-
 function mimeTypeToExtension(mimeType) {
+  // Extract the main part of the MIME type (e.g., "audio/webm" from "audio/webm;codecs=opus")
+  const mainMimeType = mimeType.split(";")[0].trim();
+
   const mimeTypes = {
     "audio/aac": "aac",
     "audio/midi": "mid",
@@ -182,7 +184,7 @@ function mimeTypeToExtension(mimeType) {
     "audio/mpeg": "mp3",
     "audio/ogg": "ogg",
     "audio/wav": "wav",
-    "audio/webm": "weba",
+    "audio/webm": "webm",
     "audio/3gpp": "3gp",
     "audio/3gpp2": "3g2",
     "audio/mp4": "mp4",
@@ -210,5 +212,5 @@ function mimeTypeToExtension(mimeType) {
     // Add more MIME types and extensions as needed
   };
 
-  return mimeTypes[mimeType] || "";
+  return mimeTypes[mainMimeType] || "";
 }
