@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
 </head>
 <body>
   <div class="container">
       <audio id="audioPlayer" controls>
         Your browser does not support the audio element.
       </audio>
-      <p id="recordingLength"/>
+      <div id="recording_text_container"><p id="recording_label">00:00</p></div>
       <div class="buttons">
         <button id="startBtn">Bắt đầu</button>
         <button id="stopBtn">Kết thúc</button>
@@ -22,6 +23,10 @@
       </div>
       <button id="clearBtn">Xóa tất cả</button>
   </div>
-  <script src="script.js"></script>
+  <!-- Include LameJS library from a CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js"></script>
+  
+  <!-- Your main JavaScript file -->
+  <script src="main.js"></script>
 </body>
 </html>
