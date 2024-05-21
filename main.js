@@ -97,10 +97,9 @@ stopBtn.addEventListener("click", () => {
       // Find and replace the existing audio file element with the new one
       const existingAudioElement = document.querySelector("audio");
       if (existingAudioElement) {
-        existingAudioElement.src = audioUrl; // Update the source of the existing audio element
-      } else {
-        // If no existing audio element, create a new one
-        document.body.appendChild(audioElement);
+        existingAudioElement.src = audioUrl;
+        existingAudioElement.load();
+        existingAudioElement.play();
       }
 
       // Enable the start button and disable the stop button
@@ -123,11 +122,7 @@ uploadBtn.addEventListener("click", () => {
   const audioBlob = new Blob(recordedChunks, { type: mediaRecorder.mimeType });
   // Assuming formData contains the audio file data
   const formData = new FormData();
-  formData.append(
-    "audio",
-    audioBlob,
-    `audio.${mimeTypeToExtension(mediaRecorder.mimeType)}`
-  );
+  formData.append("audio", audioBlob, `audio.mp3`);
   fetch("https://anhlt-record-api.onrender.com/upload_audio", {
     method: "POST",
     body: formData,
