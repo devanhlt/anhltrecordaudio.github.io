@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 startBtn.addEventListener("click", async () => {
+  recordedChunks = [];
   stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   startBtn.disabled = false; // Enable start button once permission is granted
   if (stream) {
